@@ -1,0 +1,21 @@
+class Solution:
+    def generateParenthesis(self, n: int) -> List[str]:
+        res = []
+
+        def add_parenthesis(l,o,f):
+            if len(l)==2*n:
+                res.append("".join(l))
+                return 
+            if f<o:
+                return 
+            if o>0:
+                lp = l.copy()
+                lp.append("(")
+                add_parenthesis(lp,o-1,f)
+            if f>0:
+                lm = l.copy()
+                lm.append(")")
+                add_parenthesis(lm,o,f-1)  
+
+        add_parenthesis(['('],n-1,n)
+        return res
